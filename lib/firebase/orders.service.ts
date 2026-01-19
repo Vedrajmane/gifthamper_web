@@ -23,6 +23,9 @@ export async function createOrder(order: Omit<Order, 'id' | 'createdAt'>): Promi
 
 export async function getAllOrders(): Promise<Order[]> {
   try {
+    if (!db) {
+      return [];
+    }
     const q = query(collection(db, ORDERS_COLLECTION), orderBy('createdAt', 'desc'));
     const querySnapshot = await getDocs(q);
     
@@ -47,6 +50,9 @@ export async function getAllOrders(): Promise<Order[]> {
 
 export async function getUserOrders(userId: string): Promise<Order[]> {
   try {
+    if (!db) {
+      return [];
+    }
     const q = query(
       collection(db, ORDERS_COLLECTION),
       where('userId', '==', userId),
@@ -72,6 +78,9 @@ export async function updateOrderStatus(
   location?: string
 ): Promise<void> {
   try {
+    if (!db) {
+      throw new Error('Firebase not initialized');
+    }
     const orderRef = doc(db, ORDERS_COLLECTION, orderId);
     
     // Get current order to append to updates
