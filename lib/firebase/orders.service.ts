@@ -6,6 +6,10 @@ const ORDERS_COLLECTION = 'orders';
 
 export async function createOrder(order: Omit<Order, 'id' | 'createdAt'>): Promise<string> {
   try {
+    if (!db) {
+      throw new Error('Firebase not initialized');
+    }
+    
     const docRef = await addDoc(collection(db, ORDERS_COLLECTION), {
       ...order,
       createdAt: Timestamp.now(),
