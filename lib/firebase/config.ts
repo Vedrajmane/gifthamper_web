@@ -13,8 +13,8 @@ const firebaseConfig = {
 
 // Initialize Firebase only once
 let app: FirebaseApp | undefined;
-let db: Firestore | undefined;
-let auth: Auth | undefined;
+let dbInstance: Firestore | undefined;
+let authInstance: Auth | undefined;
 
 if (typeof window !== 'undefined') {
   try {
@@ -25,13 +25,16 @@ if (typeof window !== 'undefined') {
     }
     
     if (app) {
-      db = getFirestore(app);
-      auth = getAuth(app);
+      dbInstance = getFirestore(app);
+      authInstance = getAuth(app);
     }
   } catch (error) {
     console.error('Firebase initialization error:', error);
   }
 }
 
-export { db, auth, app };
+// Export with type assertion to avoid undefined checks everywhere
+export const db = dbInstance as Firestore;
+export const auth = authInstance as Auth;
+export { app };
 export default app as FirebaseApp;
