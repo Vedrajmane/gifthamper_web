@@ -27,7 +27,7 @@ function firestoreToProduct(doc: QueryDocumentSnapshot<DocumentData>): Product {
     description: data.description,
     price: data.price,
     category: data.category,
-    imageUrl: data.imageUrl,
+    imageUrl: data.imageUrl || (data.images && data.images[0]) || '',
     createdAt: data.createdAt?.toDate(),
   };
 }
@@ -102,6 +102,7 @@ export async function addProduct(product: Omit<Product, 'id' | 'createdAt'>): Pr
     const now = Timestamp.now();
     const productData: Omit<FirestoreProduct, 'id'> = {
       ...product,
+      images: product.images || [product.imageUrl],
       createdAt: now,
       updatedAt: now,
     };
