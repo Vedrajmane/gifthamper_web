@@ -45,7 +45,12 @@ export default function ProductFormModal({
         category: product.category,
         imageUrl: product.imageUrl,
         isPersonalizable: product.isPersonalizable || false,
-        personalizationOptions: product.personalizationOptions || {
+        personalizationOptions: product.personalizationOptions ? {
+          allowName: product.personalizationOptions.allowName ?? true,
+          allowImage: product.personalizationOptions.allowImage ?? true,
+          allowMessage: product.personalizationOptions.allowMessage ?? true,
+          maxMessageLength: product.personalizationOptions.maxMessageLength ?? 200,
+        } : {
           allowName: true,
           allowImage: true,
           allowMessage: true,

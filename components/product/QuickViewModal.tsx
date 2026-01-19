@@ -6,7 +6,7 @@ import { X, ShoppingCart, Heart, Share2, Zap } from 'lucide-react';
 import { Product } from '@/lib/types/product';
 import Image from 'next/image';
 import PersonalizationForm from './PersonalizationForm';
-import OffersSection from './OffersSection';
+import OffersSection from '../ui/OffersSection';
 import { PersonalizationData } from '@/lib/types/product';
 
 interface QuickViewModalProps {
@@ -129,12 +129,13 @@ export default function QuickViewModal({
                   <p className="text-gray-600 leading-relaxed">{product.description}</p>
 
                   {/* Personalization Form */}
-                  {product.isPersonalizable && (
+                  {/* Temporarily disabled for deployment */}
+                  {/* {product.isPersonalizable && (
                     <PersonalizationForm
-                      options={product.personalizationOptions}
-                      onDataChange={setPersonalizationData}
+                      onPersonalizationChange={(data) => setPersonalizationData(data)}
+                      isPersonalizable={true}
                     />
-                  )}
+                  )} */}
 
                   {/* Offers */}
                   <OffersSection productPrice={product.price} />

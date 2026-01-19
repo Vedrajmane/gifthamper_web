@@ -81,7 +81,7 @@ export interface ProductPersonalization {
 }
 
 // Enhanced Cart Item with personalization
-export interface FirestoreCartItem extends CartItem {
+export interface FirestoreCartItem extends Omit<CartItem, 'personalization'> {
   personalization?: ProductPersonalization;
   addedAt: Timestamp;
 }

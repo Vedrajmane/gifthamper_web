@@ -12,9 +12,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase only once
-let app: FirebaseApp;
-let db: Firestore;
-let auth: Auth;
+let app: FirebaseApp | undefined;
+let db: Firestore | undefined;
+let auth: Auth | undefined;
 
 if (typeof window !== 'undefined') {
   try {
@@ -24,12 +24,14 @@ if (typeof window !== 'undefined') {
       app = getApps()[0];
     }
     
-    db = getFirestore(app);
-    auth = getAuth(app);
+    if (app) {
+      db = getFirestore(app);
+      auth = getAuth(app);
+    }
   } catch (error) {
     console.error('Firebase initialization error:', error);
   }
 }
 
-export { db, auth };
-export default app;
+export { db, auth, app };
+export default app as FirebaseApp;

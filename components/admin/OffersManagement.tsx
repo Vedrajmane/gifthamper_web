@@ -67,10 +67,13 @@ export default function OffersManagement() {
     setEditingOffer(offer);
     setFormData({
       provider: offer.provider,
+      logo: offer.logo || '',
       description: offer.description,
-      minTransaction: offer.minTransaction,
-      maxDiscount: offer.maxDiscount,
+      discount: offer.discount || '',
+      minTransaction: offer.minTransaction || 0,
       code: offer.code || '',
+      bgColor: offer.bgColor || 'bg-blue-50',
+      textColor: offer.textColor || 'text-blue-700',
     });
     setIsModalOpen(true);
   };
@@ -78,10 +81,13 @@ export default function OffersManagement() {
   const resetForm = () => {
     setFormData({
       provider: '',
+      logo: '',
       description: '',
+      discount: '',
       minTransaction: 0,
-      maxDiscount: 0,
       code: '',
+      bgColor: 'bg-blue-50',
+      textColor: 'text-blue-700',
     });
     setEditingOffer(null);
     setIsModalOpen(false);
@@ -139,12 +145,12 @@ export default function OffersManagement() {
 
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
-                <span className="text-gray-600">Min Transaction:</span>
-                <span className="font-semibold text-gray-900">₹{offer.minTransaction}</span>
+                <span className="text-gray-600">Discount:</span>
+                <span className="font-semibold text-gray-900">{offer.discount}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-600">Max Discount:</span>
-                <span className="font-semibold text-gray-900">₹{offer.maxDiscount}</span>
+                <span className="text-gray-600">Min Transaction:</span>
+                <span className="font-semibold text-gray-900">₹{offer.minTransaction}</span>
               </div>
               {offer.code && (
                 <div className="flex justify-between">
@@ -201,34 +207,18 @@ export default function OffersManagement() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Min Transaction (₹)
-                  </label>
-                  <input
-                    type="number"
-                    value={formData.minTransaction}
-                    onChange={(e) => setFormData({ ...formData, minTransaction: parseFloat(e.target.value) })}
-                    required
-                    min="0"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:outline-none"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Max Discount (₹)
-                  </label>
-                  <input
-                    type="number"
-                    value={formData.maxDiscount}
-                    onChange={(e) => setFormData({ ...formData, maxDiscount: parseFloat(e.target.value) })}
-                    required
-                    min="0"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:outline-none"
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Min Transaction (₹)
+                </label>
+                <input
+                  type="number"
+                  value={formData.minTransaction}
+                  onChange={(e) => setFormData({ ...formData, minTransaction: parseFloat(e.target.value) })}
+                  required
+                  min="0"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:outline-none"
+                />
               </div>
 
               <div>

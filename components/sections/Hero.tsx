@@ -98,7 +98,7 @@ export default function Hero() {
             className="inline-block mb-6"
           >
             <span className="bg-gradient-to-r from-rose-500 to-orange-500 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
-              ✨ Mumbai's Premium Gift Hampers Since 2003
+              ✨ Mumbai&apos;s Premium Gift Hampers Since 2003
             </span>
           </motion.div>
 

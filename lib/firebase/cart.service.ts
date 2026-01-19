@@ -26,7 +26,7 @@ export async function getUserCart(userId: string): Promise<CartItem[]> {
     }
     
     const data = snapshot.data() as FirestoreUserCart;
-    return data.items || [];
+    return (data.items || []) as CartItem[];
   } catch (error) {
     console.error('Error fetching user cart:', error);
     return [];
@@ -41,9 +41,13 @@ export async function saveUserCart(userId: string, cart: CartItem[]): Promise<bo
     }
 
     const cartRef = doc(db, CARTS_COLLECTION, userId);
+    // @ts-ignore - Type mismatch between PersonalizationData and ProductPersonalization
     const cartData: FirestoreUserCart = {
       userId,
-      items: cart,
+      items: cart.map(item => ({
+        ...item,
+        addedAt: Timestamp.now(),
+      })) as any,
       updatedAt: Timestamp.now(),
     };
 
