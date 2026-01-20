@@ -22,8 +22,8 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   const login = (username: string, password: string): boolean => {
     // Simple authentication - in production, use proper backend authentication
     // Get credentials from environment variables only (no fallback)
-    const correctUsername = process.env.ADMIN_USERNAME;
-    const correctPassword = process.env.ADMIN_PASSWORD;
+    const correctUsername = process.env.NEXT_PUBLIC_ADMIN_USERNAME;
+    const correctPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD;
     
     if (!correctUsername || !correctPassword) {
       console.error('Admin credentials not configured in environment variables');
