@@ -110,8 +110,8 @@ export default function AdminLoginModal({ isOpen, onClose }: AdminLoginModalProp
                   Login
                 </button>
 
-                <p className="text-xs text-stone-500 text-center">
-                  Default: admin / admin123
+                <p className="text-sm text-gray-600 text-center">
+                  Enter your admin credentials to access the dashboard
                 </p>
               </form>
             </div>

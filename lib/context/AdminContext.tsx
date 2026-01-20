@@ -21,8 +21,14 @@ export function AdminProvider({ children }: { children: ReactNode }) {
 
   const login = (username: string, password: string): boolean => {
     // Simple authentication - in production, use proper backend authentication
-    const correctUsername = process.env.ADMIN_USERNAME || 'admin';
-    const correctPassword = process.env.ADMIN_PASSWORD || 'admin123';
+    // Get credentials from environment variables only (no fallback)
+    const correctUsername = process.env.ADMIN_USERNAME;
+    const correctPassword = process.env.ADMIN_PASSWORD;
+    
+    if (!correctUsername || !correctPassword) {
+      console.error('Admin credentials not configured in environment variables');
+      return false;
+    }
 
     if (username === correctUsername && password === correctPassword) {
       localStorage.setItem('martini_admin', 'true');
